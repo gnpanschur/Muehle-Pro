@@ -1,0 +1,67 @@
+Mühle-Projekt
+Rolle:
+Du bist ein erfahrener Senior Full-Stack-Entwickler und Game-Architekt mit Fokus auf Realtime-Multiplayer-Systeme. Dein Ziel ist es, eine saubere, skalierbare und 100 % server-autoritäre Architektur für ein Mühle-Spiel zu entwerfen.
+
+Technischer Stack:
+
+Frontend: HTML5, CSS3 (Modernes Flexbox/Grid), Vanilla JavaScript.
+Backend: Node.js mit Express.
+Kommunikation: Socket.io für bidirektionale Echtzeit-Events.
+Design-Vorgabe: Responsive Portrait-Layout für Mobile Browser. (siehe "mühle2.jpg")
+
+Anforderung an die Logik:
+Hier sind die offiziellen Regeln, unterteilt in die drei Spielphasen:
+
+Phase 1: Setzphase (Steine setzen)
+Ablauf: Beide Spieler setzen abwechselnd ihre 9 Steine auf die Knotenpunkte (insgesamt 24 Felder).
+Mühle: Werden 3 Steine in einer Reihe (horizontal oder vertikal) platziert, ist das eine Mühle.
+Belohnung: Der Spieler darf einen Stein des Gegners vom Brett nehmen.
+Schutzregel: Ein Stein aus einer geschlossenen Mühle des Gegners darf nicht entnommen werden, es sei denn, der Gegner hat nur Steine in Mühlen.
+
+Phase 2: Zugphase (Steine bewegen)
+Voraussetzung: Alle 18 Steine (9 pro Spieler) wurden gesetzt.
+Bewegung: Ein Stein darf auf ein angrenzendes, freies Feld entlang der Linien gezogen werden.
+Mühle: Auch hier gilt: Wer eine Mühle schließt, darf einen gegnerischen Stein entfernen.
+Mühlen-Hopping: Man darf eine Mühle öffnen (einen Stein rausziehen) und im nächsten Zug wieder schließen, um erneut einen Stein zu schlagen (sofern das Feld frei blieb).
+
+Phase 3: Endphase (Springen)
+Trigger: Sobald ein Spieler nur noch 3 Steine auf dem Brett hat.
+Sonderregel: Dieser Spieler ist nicht mehr an die Linien gebunden. Er darf mit seinen Steinen auf jedes beliebige freie Feld auf dem Brett "springen".
+Gegner: Der Gegner (sofern er noch mehr als 3 Steine hat) muss sich weiterhin normal entlang der Linien bewegen.
+
+Wichtige Regeln für das Spielende
+Das Spiel endet in folgenden Szenarien:
+Verlust durch Steinmangel: Ein Spieler hat nur noch 2 Steine (er kann keine Mühle mehr bilden).
+Verlust durch Blockade: Ein Spieler ist am Zug, aber alle seine Steine sind eingekesselt und er kann keinen legalen Zug mehr machen.
+Remis (Unentschieden): * Beide Spieler haben nur noch 3 Steine und nach 20 Zügen wurde keine Mühle geschlossen.
+Die exakt gleiche Stellung tritt zum dritten Mal ein.
+
+
+1. Projektstruktur
+Erstelle eine professionelle Ordnerstruktur (z. B. /public für Frontend, /src für Server-Logik, /models für Game-State).
+
+2. Basis-Server & WebSocket-Setup
+Initialisiere einen Express-Server auf Port 3000.
+Konfiguriere Socket.io.
+Implementiere eine Fehlerbehandlung für Verbindungsabbrüche.
+
+3. Lobby-System (Basierend auf den Feldern A & B)
+Implementiere die Logik für die zwei Einstiegspunkte: (siehe "Lobby Skils.jpg")
+
+Feld A (Blau - Ersteller): Funktion createGame(playerName, opponentName). Erzeugt eine Game-ID.
+Feld B (Gelb - Beitreter): Funktion joinGame(playerName, gameID).
+Validierung: Der Name des Gegners fungiert als "Passwort". Groß-/Kleinschreibung muss beim Abgleich ignoriert werden.
+
+4. Game-State-Machine (Server-Side)
+Entwirf ein robustes Objekt für den Spielzustand: (siehe Beispiel "mühle2.jpg" und "Mühle 1.webp"
+
+Phasen: SETTING (Steine setzen), MOVING (Ziehen), FLYING (Springen bei 3 Steinen).
+Validierung: Ist der Spieler am Zug? Ist das Zielfeld frei? Entsteht eine Mühle?
+Board-Repräsentation: Nutze ein effizientes Koordinatensystem für die 24 Punkte der Mühle.
+
+5. Kommunikation & Events
+Definiere die Socket-Events:
+
+emit('init-game') -> Server sendet Startzustand.
+on('player-action') -> Server empfängt Zug und validiert.
+emit('update-state') -> Server sendet validierten neuen Zustand an beide Spieler.

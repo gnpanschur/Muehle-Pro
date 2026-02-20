@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mühle Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Lobby UI -->
+        <div id="lobby-container">
+            <h1 class="logo">Mühle Pro</h1>
+
+            <div class="lobby-card create-card">
+                <h2>Ich erstelle ein Spiel:</h2>
+                <div class="input-group">
+                    <label>1. GIB DEINEN NAMEN EIN</label>
+                    <input type="text" id="create-player-name" placeholder="Dein Vorname">
+                </div>
+                <div class="input-group">
+                    <label>2. GEGNER VORNAME</label>
+                    <input type="text" id="create-opponent-name" placeholder="Gegner Vorname">
+                </div>
+                <button id="btn-create-game" class="btn-blue">SPIEL ERSTELLEN</button>
+                <p id="create-msg" class="msg"></p>
+            </div>
+
+            <div class="lobby-card join-card">
+                <h2>Ich spiele mit:</h2>
+                <div class="input-group">
+                    <label>1. GIB DEINEN NAMEN EIN</label>
+                    <input type="text" id="join-code" placeholder="Dein Vorname">
+                </div>
+                <button id="btn-join-game" class="btn-yellow">BEITRETEN</button>
+                <p id="join-msg" class="msg"></p>
+            </div>
+
+        </div>
+
+        <!-- In-Game Logo (Hidden initially) -->
+        <h1 id="in-game-title" class="logo in-game-logo" style="display: none;">Mühle Pro</h1>
+
+        <!-- Game Board (Hidden initially) -->
+        <div id="game-container" style="display: none;">
+
+            <div id="game-header">
+                <div id="player1-info" class="player-info">
+                    <span class="player-name" id="p1-name">Spieler 1</span>
+                    <span class="player-score" id="p1-score"
+                        style="display:block; font-size:14px; font-weight:900; color:#2b7a4b; margin-bottom:5px;">Punkte:
+                        0</span>
+                    <div class="pieces-count" id="p1-pieces">9</div>
+                </div>
+                <div id="game-status">
+                    Warte auf Spielstart...
+                </div>
+                <div id="player2-info" class="player-info">
+                    <span class="player-name" id="p2-name">Spieler 2</span>
+                    <span class="player-score" id="p2-score"
+                        style="display:block; font-size:14px; font-weight:900; color:#2b7a4b; margin-bottom:5px;">Punkte:
+                        0</span>
+                    <div class="pieces-count" id="p2-pieces">9</div>
+                </div>
+            </div>
+
+            <div id="board-container">
+                <!-- SVG für die Linien -->
+                <svg viewBox="0 0 100 100" id="board-lines">
+                    <!-- Äußerer Ring -->
+                    <rect x="5" y="5" width="90" height="90" fill="none" stroke="#333" stroke-width="1.5" />
+                    <!-- Mittlerer Ring (genau in der Mitte) -->
+                    <rect x="18" y="18" width="64" height="64" fill="none" stroke="#333" stroke-width="1.5" />
+                    <!-- Innerer Ring -->
+                    <rect x="31" y="31" width="38" height="38" fill="none" stroke="#333" stroke-width="1.5" />
+
+                    <!-- Verbindungslinien -->
+                    <line x1="50" y1="5" x2="50" y2="31" stroke="#333" stroke-width="1.5" />
+                    <line x1="50" y1="69" x2="50" y2="95" stroke="#333" stroke-width="1.5" />
+                    <line x1="5" y1="50" x2="31" y2="50" stroke="#333" stroke-width="1.5" />
+                    <line x1="69" y1="50" x2="95" y2="50" stroke="#333" stroke-width="1.5" />
+                </svg>
+
+                <!-- Interaktive Knotenpunkte werden hier via JS injiziert -->
+                <div id="nodes"></div>
+            </div>
+
+            <!-- Dynamische Spiel-Anweisungen -->
+            <div id="game-instructions" class="instructions-box">
+                Willkommen bei Mühle Pro! Warten auf Spielstart...
+            </div>
+
+            <button id="btn-restart-game" class="btn-blue" style="display: none; margin-top: 15px;">NEUES SPIEL
+                STARTEN</button>
+        </div>
+
+        <!-- Global Fullscreen Button -->
+        <button id="btn-fullscreen" class="btn-fullscreen">[ ] FULL-SCREEN</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+
+</html>

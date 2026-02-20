@@ -1,0 +1,347 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #ffffff;
+    /* Weißer Hintergrund für die Lobby */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.5s ease;
+}
+
+body.in-game {
+    background: #166134;
+    /* Klassisches Casino-Grün */
+}
+
+#app {
+    width: 100%;
+    max-width: 480px;
+    padding: 20px;
+}
+
+/* Lobby Styling */
+.logo {
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    /* Ein tiefes Blau/Grau */
+    letter-spacing: 1.5px;
+    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.in-game-logo {
+    color: #f8eeb2;
+    /* An das Spielfeld angepasste helle Schrift für den grünen Casino-Hintergrund */
+    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8);
+    /* Etwas stärkerer Schatten für mehr Lesbarkeit auf Grün */
+    margin-bottom: 20px;
+}
+
+.lobby-card {
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.create-card {
+    background-color: #d1e1fd;
+    border: 1px solid #b7cffe;
+}
+
+.join-card {
+    background-color: #f8eeb2;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.lobby-card h2 {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+    outline: none;
+}
+
+#create-opponent-name,
+#join-code {
+    text-transform: uppercase;
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+    font-weight: normal;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+    text-transform: uppercase;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.btn-blue {
+    background-color: #7b9fed;
+    color: white;
+}
+
+.btn-blue:hover {
+    background-color: #6a90df;
+}
+
+.btn-yellow {
+    background-color: #dfcd60;
+    color: white;
+}
+
+.btn-yellow:hover {
+    background-color: #d0be50;
+}
+
+.btn-fullscreen {
+    background-color: #eff3fa;
+    color: #333;
+    max-width: 250px;
+    margin: 20px auto 0;
+    display: block;
+    border-radius: 30px;
+    font-size: 14px;
+    padding: 12px;
+}
+
+.msg {
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #d9534f;
+}
+
+/* Game Interface */
+#game-container {
+    width: 100%;
+    background: #f8eeb2;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+#game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.player-info {
+    text-align: center;
+    width: 30%;
+}
+
+.player-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 900;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pieces-count {
+    font-size: 18px;
+    font-weight: 900;
+    background: #f0f0f0;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    margin: 0 auto;
+    color: #333;
+    border: 2px solid #ddd;
+}
+
+#p1-pieces {
+    background: #fff;
+    border-color: #ccc;
+}
+
+#p2-pieces {
+    background: #333;
+    color: #fff;
+    border-color: #111;
+}
+
+#game-status {
+    width: 40%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #7b9fed;
+    padding: 10px;
+    background: #f5f8ff;
+    border-radius: 8px;
+    border: 1px solid #d1e1fd;
+}
+
+/* Board Styling */
+#board-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    /* 1:1 Aspect */
+    background: #f8eeb2;
+    /* Angepasste Holz-Farbe */
+    border-radius: 8px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.15);
+    /* Leichter Schatten für Tiefenwirkung */
+    margin-bottom: 15px;
+    /* Abstand zur Tip-Box */
+}
+
+/* Dynamische Spiel-Anweisungen */
+.instructions-box {
+    background-color: #fcf9e3;
+    /* Ganz helles Beige */
+    border: 1px solid #e5dca5;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.instructions-box strong {
+    color: #2b7a4b;
+    /* Casino-Grün für Hervorhebungen */
+}
+
+#board-lines {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+}
+
+#nodes {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+}
+
+.node {
+    position: absolute;
+    width: 9%;
+    height: 9%;
+    background: transparent;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+/* Kleiner schwarzer Punkt in der Mitte für leere Felder */
+.node::after {
+    content: '';
+    display: block;
+    width: 35%;
+    height: 35%;
+    background: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 32.5%;
+    left: 32.5%;
+}
+
+.node.piece-white {
+    background: radial-gradient(circle at 30% 30%, #fff, #e0e0e0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.node.piece-black {
+    background: radial-gradient(circle at 30% 30%, #555, #111);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.node.piece-white::after,
+.node.piece-black::after {
+    display: none;
+}
+
+.node.selected {
+    box-shadow: 0 0 0 4px #e5cd6e, 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.node.highlight-move {
+    background: rgba(125, 157, 237, 0.4);
+}
+
+.node.highlight-move::after {
+    display: none;
+}
+
+.node.highlight-capture {
+    box-shadow: 0 0 0 4px #d9534f;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 2px #d9534f;
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px #d9534f;
+    }
+
+    100% {
+        box-shadow: 0 0 0 2px #d9534f;
+    }
+}
