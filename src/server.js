@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Statische Dateien aus dem /public Ordner ausliefern
 app.use(express.static(path.join(__dirname, '../public')));

@@ -65,3 +65,8 @@ Definiere die Socket-Events:
 emit('init-game') -> Server sendet Startzustand.
 on('player-action') -> Server empfängt Zug und validiert.
 emit('update-state') -> Server sendet validierten neuen Zustand an beide Spieler.
+
+implement a persistent score and a restart game mechanic
+Adding UI elements for the scoreboard and play again button
+
+Online Stellen
