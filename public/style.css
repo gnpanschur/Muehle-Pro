@@ -149,24 +149,43 @@ button:active {
 .global-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
+    /* Slightly reduced gap to fit 3 buttons better */
     margin: 15px auto 0;
-    max-width: 300px;
+    width: 100%;
+    max-width: 400px;
+    /* Increased max-width to allow all 3 buttons space */
 }
 
 .btn-fullscreen,
-.btn-info {
+.btn-info,
+.btn-exit {
     background-color: #eff3fa;
     color: #333;
     flex: 1;
     border-radius: 30px;
-    font-size: 13px;
-    padding: 10px;
+    font-size: 12px;
+    /* Slightly smaller font to fit well */
+    padding: 10px 5px;
+    /* Reduced side padding */
     white-space: nowrap;
 }
 
 .btn-info {
     background-color: #d1e1fd;
+}
+
+.btn-info:hover {
+    background-color: #b7cffe;
+}
+
+.btn-exit {
+    background-color: #fdd1d1;
+    color: #a00;
+}
+
+.btn-exit:hover {
+    background-color: #feb7b7;
 }
 
 .btn-info:hover {

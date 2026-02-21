@@ -26,6 +26,13 @@ document.getElementById('btn-fullscreen').addEventListener('click', () => {
     }
 });
 
+// Exit Button
+document.getElementById('btn-exit').addEventListener('click', () => {
+    if (confirm('Willst du das Spiel wirklich verlassen und zur Lobby zurückkehren?')) {
+        window.location.reload();
+    }
+});
+
 // Info Modal
 const btnInfo = document.getElementById('btn-info');
 const infoModal = document.getElementById('info-modal');
