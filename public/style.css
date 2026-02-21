@@ -146,17 +146,31 @@ button:active {
     background-color: #d0be50;
 }
 
-.btn-fullscreen {
+.global-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px auto 0;
+    max-width: 300px;
+}
+
+.btn-fullscreen,
+.btn-info {
     background-color: #eff3fa;
     color: #333;
-    max-width: 250px;
-    margin: 12px auto 0;
-    /* reduced from 20px */
-    display: block;
+    flex: 1;
     border-radius: 30px;
-    font-size: 14px;
+    font-size: 13px;
     padding: 10px;
-    /* reduced from 12px */
+    white-space: nowrap;
+}
+
+.btn-info {
+    background-color: #d1e1fd;
+}
+
+.btn-info:hover {
+    background-color: #b7cffe;
 }
 
 .msg {
@@ -379,4 +393,89 @@ button:active {
 .toast.show {
     visibility: visible;
     opacity: 1;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    border-radius: 12px;
+    padding: 24px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.modal-body h3 {
+    font-size: 15px;
+    color: #2b7a4b;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.modal-body p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.modal-body .highlight {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffecb5;
+    padding: 8px;
+    border-radius: 4px;
 }

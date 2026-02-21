@@ -99,8 +99,44 @@
         <!-- Toast Notification -->
         <div id="toast" class="toast"></div>
 
-        <!-- Global Fullscreen Button -->
-        <button id="btn-fullscreen" class="btn-fullscreen">[ ] FULL-SCREEN</button>
+        <!-- Global Buttons -->
+        <div class="global-buttons">
+            <button id="btn-info" class="btn-info">ℹ️ INFO & REGELN</button>
+            <button id="btn-fullscreen" class="btn-fullscreen">[ ] VOLLBILD</button>
+        </div>
+
+        <!-- Info Modal -->
+        <div id="info-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="close-info">&times;</span>
+                <h2>Mühle Anleitung & Regeln</h2>
+                <div class="modal-body">
+                    <h3>Wie starte ich ein Spiel?</h3>
+                    <p>1. Ein Spieler erstellt ein Spiel und teilt seinem Gegner den <strong>Raumcode</strong> mit (das
+                        ist automatisch der beim Erstellen eingegebene Vorname des Gegners).</p>
+                    <p>2. Der zweite Spieler gibt genau diesen Code bei "Beitreten" ein.</p>
+
+                    <h3>Spielphasen</h3>
+                    <p><strong>1. Setzphase:</strong> Beide Spieler setzen abwechselnd ihre 9 Steine auf freie Punkte.
+                    </p>
+                    <p><strong>2. Zugphase:</strong> Ist alles gesetzt, ziehen die Spieler abwechselnd einen Stein auf
+                        einen angrenzenden freien Punkt.</p>
+                    <p><strong>3. Endphase (Springen):</strong> Hat ein Spieler nur noch 3 Steine, darf er mit seinem
+                        Zug überall auf dem Brett <em>hinspringen</em>.</p>
+
+                    <h3>Mühle & Schlagen</h3>
+                    <p>Wer drei eigene Steine in einer Linie aufbaut, schließt eine <strong>Mühle</strong>. Er darf
+                        sofort zur Belohnung einen gegnerischen Stein vom Brett entfernen.</p>
+                    <p class="highlight">⚠️ Steine, die Teil einer geschlossenen gegnerischen Mühle sind, sind
+                        <strong>geschützt</strong> und dürfen nicht entfernt werden (außer es gibt keine anderen Steine
+                        mehr).</p>
+
+                    <h3>Spielende</h3>
+                    <p>Das Spiel endet, wenn ein Spieler <strong>nur noch 2 Steine</strong> hat oder keinen gültigen Zug
+                        mehr machen kann. Der andere Spieler gewinnt!</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>

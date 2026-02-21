@@ -26,6 +26,25 @@ document.getElementById('btn-fullscreen').addEventListener('click', () => {
     }
 });
 
+// Info Modal
+const btnInfo = document.getElementById('btn-info');
+const infoModal = document.getElementById('info-modal');
+const closeInfo = document.getElementById('close-info');
+
+btnInfo.addEventListener('click', () => {
+    infoModal.style.display = 'flex';
+});
+
+closeInfo.addEventListener('click', () => {
+    infoModal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === infoModal) {
+        infoModal.style.display = 'none';
+    }
+});
+
 socket.on('connect', () => {
     console.log('Verbunden mit dem Server');
 });
