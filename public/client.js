@@ -74,8 +74,18 @@ socket.on('game-started', (gameInfo) => {
     initBoard();
 });
 
+const toastElem = document.getElementById('toast');
+
+function showToast(msg) {
+    toastElem.innerText = msg;
+    toastElem.classList.add('show');
+    setTimeout(() => {
+        toastElem.classList.remove('show');
+    }, 3000);
+}
+
 socket.on('action-error', (msg) => {
-    alert(msg); // Basic error reporting
+    showToast(msg);
 });
 
 // ====== GAME LOGIC ====== //
